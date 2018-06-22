@@ -3,15 +3,11 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        String result = 'failure'
         catchError {
           sh 'mvn sonar:sonar'
-          result = 'success'
         }
-        if (result == 'failure') {
           step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
           error "Code Quality Check failed, please read logs..."
-        }
       }
     }
     stage('CodeBuild') {
