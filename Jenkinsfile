@@ -8,7 +8,7 @@ pipeline {
         }
         steps {
           step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-          step (error "Program failed, please read logs...")
+          error "Program failed, please read logs..."
         }
       }
     }
