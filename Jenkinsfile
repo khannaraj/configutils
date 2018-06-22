@@ -5,8 +5,11 @@ pipeline {
       steps {
         catchError {
           sh 'mvn sonar:sonar'
-        } 
-        step([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+        }
+        steps {
+          step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+          step {error "Program failed, please read logs..."}
+        }
       }
     }
     stage('CodeBuild') {
