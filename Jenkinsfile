@@ -13,7 +13,7 @@ pipeline {
     stage('CodeBuild') {
       steps {
         catchError {
-          sh 'cd config-utils; mvn install'
+          sh 'mvn install'
         }
         step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
         error "Code Build failed, please read logs..."
