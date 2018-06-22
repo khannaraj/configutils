@@ -5,11 +5,10 @@ pipeline {
       steps {
         script {
           try {
-            step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-            sh 'mvn sonar:sonar'
+            sh 'cd config-utils; mvn sonar:sonar'
           } catch (Exception e) {
-          step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-          error "Code Quality Check failed, please read logs..."
+            step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+            error "Code Quality Check failed, please read logs..."
           }
         }
       }
@@ -20,8 +19,8 @@ pipeline {
           try {
             sh 'cd config-utils; mvn install'
           } catch (Exception e) {
-          step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-          error "Code Build failed, please read logs..."
+            step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+            error "Code Build failed, please read logs..."
           }
         }
       }
