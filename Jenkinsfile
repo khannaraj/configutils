@@ -3,18 +3,21 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        try {
-          sh 'cd config-utils; mvn sonar:sonar'
-        } catch(err) {
-        step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-        error "Code Quality Check failed, please read logs..."
+        result = 'failure'
+        catchError {
+          sh 'mvn sonar:sonar'
+          result = 'success'
+        }
+        if (result == 'failure') {
+          step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+          error "Code Quality Check failed, please read logs..."
         }
       }
     }
     stage('CodeBuild') {
       steps {
         catchError {
-          sh 'mvn install'
+          sh 'cd config-utils; mvn install'
         }
         step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
         error "Code Build failed, please read logs..."
