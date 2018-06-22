@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        sh 'pwd; cd configutils; mvn sonar:sonar'
+        sh 'cd config-utils; mvn sonar:sonar'
       }
     }
     stage('CodeBuild') {
