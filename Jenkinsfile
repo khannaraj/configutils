@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        result = 'failure'
+        String result = 'failure'
         catchError {
           sh 'mvn sonar:sonar'
           result = 'success'
