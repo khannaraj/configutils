@@ -4,11 +4,11 @@ pipeline {
     stage('CodeQuality') {
       steps {
         try {
-            sh 'mvn sonar:sonar'
-          catch (err) {
-            echo "FOund an error "
-            echo err
-          }
+          sh 'mvn sonar:sonar'
+        } catch (err) {
+          echo "FOund an error "
+          echo err
+        }
       }
     }
     stage('CodeBuild') {
