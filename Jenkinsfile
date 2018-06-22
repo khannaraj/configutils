@@ -6,10 +6,8 @@ pipeline {
         catchError {
           sh 'mvn sonar:sonar'
         }
-        steps {
-          step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
-          error "Program failed, please read logs..."
-        }
+        step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+        error "Program failed, please read logs..."
       }
     }
     stage('CodeBuild') {
