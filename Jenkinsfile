@@ -3,12 +3,10 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        try {
+        catchError {
           sh 'mvn sonar:sonar'
-        } catch (err) {
-          echo "FOund an error "
-          echo err
-        }
+        } 
+        step([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
       }
     }
     stage('CodeBuild') {
