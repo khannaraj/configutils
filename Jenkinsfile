@@ -8,7 +8,7 @@ pipeline {
     }
     stage('CodeBuild') {
       steps {
-        sh 'mvn install'
+        sh 'cd config-utils; mvn install'
       }
     }
     stage('Install') {
