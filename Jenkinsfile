@@ -5,6 +5,7 @@ pipeline {
       steps {
         script {
           try {
+            step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
             sh 'mvn sonar:sonar'
           } catch (Exception e) {
           step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
