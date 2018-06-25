@@ -5,7 +5,7 @@ pipeline {
       steps {
         script {
           try {
-            sh 'mvn sonar:sonar'
+            sh 'cd config-utils; mvn sonar:sonar'
           } catch (Exception e) {
             step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
             error "Code Quality Check failed, please read logs..."
