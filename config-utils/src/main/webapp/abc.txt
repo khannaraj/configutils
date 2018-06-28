@@ -1,0 +1,3 @@
+prop1=A1
+prop2=B1
+prop3=C1
