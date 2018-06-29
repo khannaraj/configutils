@@ -11,6 +11,7 @@ pipeline {
             error "Code Quality Check failed, please read logs..."
           }
         }
+
       }
     }
     stage('CodeBuild') {
@@ -23,11 +24,15 @@ pipeline {
             error "Code Build failed, please read logs..."
           }
         }
+
       }
     }
     stage('Install') {
       steps {
-        sh 'echo "Installing the code"'
+        sh '''echo "Installing the code"
+id
+pwd'''
+        sh 'cp config-utils/target/utility.war  /usr/share/tomcat8/webapps'
       }
     }
     stage('Test') {

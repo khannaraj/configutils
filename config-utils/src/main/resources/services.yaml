@@ -7,17 +7,17 @@ configs:
     configs:
       -  name: Application1 Service1
          envs:
-           dev: http://localhost:8080/config-utils/abc.txt
-           test: http://localhost:8080/config-utils/abc2.txt
-           stage: http://localhost:8080/config-utils/abc3.txt
+           dev: http://18.191.233.254:8085/config-utils/abc.txt
+           test: http://18.191.233.254:8085/config-utils/abc2.txt
+           stage: http://18.191.233.254:8085/config-utils/abc3.txt
       -  name: Application1 Service2
          envs:
-           dev: http://localhost:8080/config-utils/abc2.txt
+           dev: http://18.191.233.254:8085/config-utils/abc2.txt
   - name: Application2
     code: Application2
     id: 2
     configs:
       -  name: Application2 Services
          envs:
-           dev: http://localhost:8080/config-utils/abc3.txt
+           dev: http://18.191.233.254:8085/config-utils/abc3.txt
            
