@@ -7,9 +7,9 @@ pipeline {
           try {
             sh 'mvn sonar:sonar'
           } catch (Exception e) {
-            mail to: 'gnce.acsl@gmail.com',
-    subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) is waiting for input",
-    body: "Please go to ${BUILD_URL} and verify the build"
+            mail to: 'gnce.acsl@gmail.com', from: jenkins@sts-demo.com,
+            subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) is waiting for input",
+            body: "Please go to ${BUILD_URL} and verify the build"
             error "Code Quality Check failed, please read logs..."
           }
         }
@@ -51,8 +51,5 @@ pwd'''
         sh 'echo "Send email to test team for testing"'
       }
     }
-  }
-  environment {
-    errorVar = 'false'
   }
 }
