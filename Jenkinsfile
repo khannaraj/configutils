@@ -3,7 +3,6 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        environment.errorVar = 'true'
         script {
           try {
             sh 'cd config-utils; mvn sonar:sonar'
@@ -11,9 +10,6 @@ pipeline {
             step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
             error "Code Quality Check failed, please read logs..."
           }
-        }
-        if (environment.errorVar == 'true') {
-          sh 'echo "Success in testing"'
         }
       }
     }
