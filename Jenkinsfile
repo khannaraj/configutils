@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('CodeQuality') {
       steps {
-        errorVar = true
+        errorVar = 'true'
         script {
           try {
             sh 'cd config-utils; mvn sonar:sonar'
@@ -12,7 +12,7 @@ pipeline {
             error "Code Quality Check failed, please read logs..."
           }
         }
-        if (errorVar == true) {
+        if (errorVar == 'true') {
           sh 'echo "Success in testing"'
         }
       }
