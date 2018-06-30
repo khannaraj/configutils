@@ -8,6 +8,9 @@ pipeline {
             sh 'cd config-utils; mvn sonar:sonar'
           } catch (Exception e) {
             step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+            mail to: 'gnce.acsl@gmail.com',
+    subject: "Build failed",
+    body: "Please go to ${BUILD_URL} and verify the build"
             error "Code Quality Check failed, please read logs..."
           }
         }
