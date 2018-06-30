@@ -5,7 +5,7 @@ pipeline {
       steps {
         script {
           try {
-            sh 'mvn sonar:sonar'
+            sh 'cd config-utils; mvn sonar:sonar'
           } catch (Exception e) {
             mail to: 'gnce.acsl@gmail.com', 
             subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) is waiting for input",
@@ -21,7 +21,9 @@ pipeline {
           try {
             sh 'cd config-utils; mvn install'
           } catch (Exception e) {
-            step ([$class: 'Mailer', recipients: 'gnce.acsl@gmail.com'])
+            mail to: 'gnce.acsl@gmail.com', 
+            subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) code build failed, awaiting input",
+            body: "Please go to ${BUILD_URL} and verify the build"
             error "Code Build failed, please read logs..."
           }
         }
@@ -30,9 +32,7 @@ pipeline {
     }
     stage('Install') {
       steps {
-        sh '''echo "Installing the code"
-id
-pwd'''
+        sh 'echo "Installing the code"'
         sh 'cp config-utils/target/utility.war  /usr/share/tomcat8/webapps'
       }
     }
