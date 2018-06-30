@@ -51,4 +51,7 @@ pwd'''
       }
     }
   }
+  environment {
+    error = 'false'
+  }
 }
